@@ -1,4 +1,4 @@
-(function() {
+(function(global) {
   'use strict';
 
   const test = /guys?/i;
@@ -26,7 +26,5 @@
     }
   }
 
-  heyLadies();
-
-  window.setInterval(heyLadies, 1000);
-})();
+  window.heyLadies = heyLadies;
+})(window);

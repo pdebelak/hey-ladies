@@ -9,7 +9,7 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["index.js"]
+      "js": ["src/hey-ladies.js", "src/index.js"]
     }
   ]
 }
