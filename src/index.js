@@ -1,4 +1,2 @@
-(function(global) {
-  heyLadies();
-  global.setInterval(global.heyLadies, 1000);
-})(window);
+heyLadies();
+window.setInterval(heyLadies, 1000);

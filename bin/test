@@ -1,4 +1,4 @@
 #!/bin/bash
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-open "$DIR/../spec/spec_runner.html"
+phantomjs $DIR/../spec/spec_runner.js $DIR/../spec/spec_runner.html
