@@ -1,6 +1,11 @@
 var heyLadies = (function() {
   'use strict';
 
+  // from http://stackoverflow.com/a/4878800/3945932
+  function toTitleCase(str) {
+        return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+  }
+
   // from http://stackoverflow.com/a/1026087/3945932
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -16,6 +21,9 @@ var heyLadies = (function() {
       [
         new RegExp(change[0], 'g'),
         change[1]
+      ], [
+        new RegExp(toTitleCase(change[0]), 'g'),
+        toTitleCase(change[1])
       ], [
         new RegExp(capitalizeFirstLetter(change[0]), 'g'),
         capitalizeFirstLetter(change[1])
