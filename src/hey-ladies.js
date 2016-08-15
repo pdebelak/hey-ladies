@@ -1,11 +1,31 @@
 var heyLadies = (function() {
   'use strict';
 
-  const test = /guys?/i;
-  const regexes = [[/guys/g, 'ladies'], [/Guys/g, 'Ladies'], [/guys/gi, 'LADIES'], [/guy/g, 'lady'], [/Guy/g, 'Lady'], [/guy/gi, 'LADY']];
-  const regexLength = regexes.length;
+  // from http://stackoverflow.com/a/1026087/3945932
+  function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
 
-  return function() {
+  return function(userChanges) {
+    const rawChanges = userChanges || [['guys', 'ladies'], ['guy', 'lady']];
+
+    const changes = rawChanges.map(change => change.map(changePart => changePart.toLowerCase()));;
+    const test = new RegExp(`(${changes.map(change => change[0]).join('|')})`, 'i');
+
+    const regexes = changes.map(change => [
+      [
+        new RegExp(change[0], 'g'),
+        change[1]
+      ], [
+        new RegExp(capitalizeFirstLetter(change[0]), 'g'),
+        capitalizeFirstLetter(change[1])
+      ], [
+        new RegExp(change[0], 'gi'),
+        change[1].toUpperCase()
+      ]
+    ]).reduce((builtRegexes, groupOfRegexes) => builtRegexes.concat(groupOfRegexes), []);
+
+    const regexLength = regexes.length;
     let node;
 
     const html = document.querySelector('html');

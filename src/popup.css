@@ -1,0 +1,38 @@
+body {
+  width: 300px;
+  padding: 15px;
+}
+
+label {
+  display: block;
+  margin: 3px 0;
+}
+
+input {
+  display: block;
+  width: 100%;
+  border: 1px solid #eee;
+  border-radius: 3px;
+  padding: 2px;
+}
+
+button {
+  display: block;
+  padding: 5px 10px;
+  border: 1px solid #eee;
+  border-radius 3px;
+  color: white;
+  background-color: blue;
+}
+
+.from-container, .to-container {
+  float: left;
+  width: 50%;
+  box-sizing: border-box;
+  overflow: auto;
+  margin-bottom: 6px;
+}
+
+.to-container {
+  padding-left: 15px;
+}
