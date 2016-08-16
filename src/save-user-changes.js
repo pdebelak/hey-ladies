@@ -1,8 +1,10 @@
 var fromInputs = document.getElementsByClassName('from');
 var toInputs = document.getElementsByClassName('to');
+var disabledCheckbox = document.getElementById('disabled');
 
-chrome.storage.local.get(['heyLadiesUserChanges'], function(result) {
+chrome.storage.local.get(['heyLadiesUserChanges', 'heyLadiesDisabled'], function(result) {
   var heyLadiesUserChanges = result.heyLadiesUserChanges;
+  var disabled = result.heyLadiesDisabled;
   if (heyLadiesUserChanges && heyLadiesUserChanges[0]) {
     heyLadiesUserChanges.forEach(function(change, index) {
       if (index > 0) {
@@ -12,6 +14,10 @@ chrome.storage.local.get(['heyLadiesUserChanges'], function(result) {
       fromInputs[index].value = change[0];
       toInputs[index].value = change[1];
     });
+  }
+
+  if (disabled) {
+    disabledCheckbox.checked = true;
   }
 });
 
@@ -28,11 +34,12 @@ function saveChanges(e) {
     }
     return null;
   }).filter(function(value) { return value; });
+  var disabled = disabledCheckbox.checked;
 
   if (values.length) {
-    chrome.storage.local.set({ heyLadiesUserChanges: values });
+    chrome.storage.local.set({ heyLadiesUserChanges: values, heyLadiesDisabled: disabled });
   } else {
-    chrome.storage.local.set({ heyLadiesUserChanges: null });
+    chrome.storage.local.set({ heyLadiesUserChanges: null, heyLadiesDisabled: disabled });
   }
 }
 

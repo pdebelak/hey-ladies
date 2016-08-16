@@ -59,10 +59,10 @@ describe('hey-ladies', function() {
     expect(guyLink.innerHTML).toEqual(content);
   });
 
-  it('can take an argument of different changes to make', function() {
+  it('can take an argument of additional changes to make', function() {
     var argument = [['manly', 'ladylike']];
     var content = setContent('This guy is very manly');
     heyLadies(argument);
-    expect(content.textContent).toEqual('This guy is very ladylike');
+    expect(content.textContent).toEqual('This lady is very ladylike');
   });
 });

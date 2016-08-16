@@ -12,33 +12,33 @@ var heyLadies = (function() {
   }
 
   return function(userChanges) {
-    const rawChanges = userChanges || [['guys', 'ladies'], ['guy', 'lady']];
+    const rawChanges = [['guys', 'ladies'], ['guy', 'lady']].concat(userChanges || []);
 
     const changes = rawChanges.map(change => change.map(changePart => changePart.toLowerCase()));;
     const test = new RegExp(`(${changes.map(change => change[0]).join('|')})`, 'i');
 
-    const regexes = changes.map(change => [
-      [
-        new RegExp(change[0], 'g'),
-        change[1]
-      ], [
-        new RegExp(toTitleCase(change[0]), 'g'),
-        toTitleCase(change[1])
-      ], [
-        new RegExp(capitalizeFirstLetter(change[0]), 'g'),
-        capitalizeFirstLetter(change[1])
-      ], [
-        new RegExp(change[0], 'gi'),
-        change[1].toUpperCase()
-      ]
-    ]).reduce((builtRegexes, groupOfRegexes) => builtRegexes.concat(groupOfRegexes), []);
-
-    const regexLength = regexes.length;
     let node;
 
     const html = document.querySelector('html');
 
     if (html.textContent.match(test)) {
+      const regexes = changes.map(change => [
+        [
+          new RegExp(change[0], 'g'),
+          change[1]
+        ], [
+          new RegExp(toTitleCase(change[0]), 'g'),
+          toTitleCase(change[1])
+        ], [
+          new RegExp(capitalizeFirstLetter(change[0]), 'g'),
+          capitalizeFirstLetter(change[1])
+        ], [
+          new RegExp(change[0], 'gi'),
+          change[1].toUpperCase()
+        ]
+      ]).reduce((builtRegexes, groupOfRegexes) => builtRegexes.concat(groupOfRegexes), []);
+
+      const regexLength = regexes.length;
       const walker = document.createTreeWalker(html, NodeFilter.SHOW_TEXT, null, false);
       while (node = walker.nextNode()) {
         let newContent = node.nodeValue;

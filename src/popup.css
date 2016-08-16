@@ -1,6 +1,14 @@
 body {
   width: 300px;
   padding: 15px;
+  font-family: sans-serif;
+}
+
+h1 {
+  margin: 0 0 3px 0;
+  padding: 0;
+  font-size: 18px;
+  font-weight: 500;
 }
 
 label {
@@ -8,7 +16,7 @@ label {
   margin: 3px 0;
 }
 
-input {
+input[type="text"] {
   display: block;
   width: 100%;
   border: 1px solid #eee;
