@@ -53,11 +53,11 @@ function addInputs(e) {
   }
   var html = [
     '<div class="from-container">',
-    '<label for="from">Change from</label>',
+    '<label class="bold" for="from">Change from</label>',
     '<input name="from" class="from" type="text">',
     '</div>',
     '<div class="to-container">',
-    '<label for="to">To</label>',
+    '<label class="bold" for="to">To</label>',
     '<input name="to" class="to" type="text">',
     '</div>'
   ].join('');
