@@ -8,6 +8,13 @@ browser.storage.local.get(['heyLadiesUserChanges', 'heyLadiesDisabled'], functio
   }
   if (!disabled) {
     heyLadies(userChanges);
-    window.setInterval(function() { heyLadies(userChanges); }, 1000);
+    var observer = new MutationObserver(function() { heyLadies(userChanges); });
+    var config = {
+      attributes: true,
+      characterData: true,
+      childList: true,
+      subtree: true,
+    };
+    observer.observe(document, config);
   }
 });
