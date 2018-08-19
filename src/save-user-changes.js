@@ -2,7 +2,7 @@ var fromInputs = document.getElementsByClassName('from');
 var toInputs = document.getElementsByClassName('to');
 var disabledCheckbox = document.getElementById('disabled');
 
-chrome.storage.local.get(['heyLadiesUserChanges', 'heyLadiesDisabled'], function(result) {
+browser.storage.local.get(['heyLadiesUserChanges', 'heyLadiesDisabled'], function(result) {
   var heyLadiesUserChanges = result.heyLadiesUserChanges;
   var disabled = result.heyLadiesDisabled;
   if (heyLadiesUserChanges && heyLadiesUserChanges[0]) {
@@ -37,9 +37,9 @@ function saveChanges(e) {
   var disabled = disabledCheckbox.checked;
 
   if (values.length) {
-    chrome.storage.local.set({ heyLadiesUserChanges: values, heyLadiesDisabled: disabled });
+    browser.storage.local.set({ heyLadiesUserChanges: values, heyLadiesDisabled: disabled });
   } else {
-    chrome.storage.local.set({ heyLadiesUserChanges: null, heyLadiesDisabled: disabled });
+    browser.storage.local.set({ heyLadiesUserChanges: null, heyLadiesDisabled: disabled });
   }
 }
 

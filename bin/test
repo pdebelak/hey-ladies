@@ -1,4 +1,10 @@
 #!/bin/bash
 
+OPEN_COMMAND=open
+
+if command -v xdg-open >/dev/null 2>&1; then
+  OPEN_COMMAND=xdg-open
+fi
+
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-open $DIR/../spec/spec_runner.html
+$OPEN_COMMAND $DIR/../spec/spec_runner.html
