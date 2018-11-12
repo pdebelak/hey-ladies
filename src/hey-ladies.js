@@ -3,7 +3,7 @@ var heyLadies = (function() {
 
   // from http://stackoverflow.com/a/4878800/3945932
   function toTitleCase(str) {
-        return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
   }
 
   // from http://stackoverflow.com/a/1026087/3945932
@@ -41,10 +41,12 @@ var heyLadies = (function() {
       const regexLength = regexes.length;
       const walker = document.createTreeWalker(html, NodeFilter.SHOW_TEXT, null, false);
       while (node = walker.nextNode()) {
+        const tagName = node.parentNode.tagName;
+        if (tagName === 'STYLE' || tagName === 'SCRIPT') { continue; }
         let newContent = node.nodeValue;
 
         if (newContent.match(test)) {
-          for (var i=0;i<regexLength;i++) {
+          for (let i = 0; i < regexLength; i++) {
             newContent = newContent.replace(regexes[i][0], regexes[i][1]);
           }
 

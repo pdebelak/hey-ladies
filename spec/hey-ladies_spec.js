@@ -65,4 +65,28 @@ describe('hey-ladies', function() {
     heyLadies(argument);
     expect(content.textContent).toEqual('This lady is very ladylike');
   });
+
+  it('ignores the content inside a style tag', function() {
+    var text = `<style>
+      @font-face {
+        font-family: 'BaseFont';
+        src: url(https://guys.com/assets/fonts/brandon-regular.woff) format('woff2'),
+             url(https://guys.com/assets/fonts/brandon-regular.woff2) format('woff');
+        font-weight: 300;
+        font-style: normal;
+      }
+    </style>`;
+    var content = setContent(text);
+    heyLadies();
+    expect(content.innerHTML).toEqual(text);
+  });
+
+  it('ignores the content inside a script tag', function() {
+    var text = `<script>
+      document.getElementById('body-content').className = 'guys';
+    </script>`;
+    var content = setContent(text);
+    heyLadies();
+    expect(content.innerHTML).toEqual(text);
+  });
 });
